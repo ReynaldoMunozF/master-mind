@@ -46,7 +46,6 @@ colorEscogidoCinco.onclick = function () {
 posicionUno.onclick = function () {
   let posicionUnoFinal = sessionStorage.getItem("colorEscogido");
   combinacionJugador.splice(0, 1, posicionUnoFinal);
-
   posicionUno.style.backgroundColor = posicionUnoFinal;
   sessionStorage.clear();
 };
@@ -92,11 +91,10 @@ const combinacionJugador = [];
 //   "gris",
 // ];
 
-const condicionGanadora = [1, 1, 1, 1, 1];
-console.log(condicionGanadora);
-
 //-------------------- VERIFICACION DE ACIERTOS  -----------------
 btnenviar.onclick = function () {
+  const condicionGanadora = [1, 1, 1, 1, 1];
+  console.log(condicionGanadora);
   const obtenerAciertos = (combinacionGanadora, combinacionJugador) => {
     let aciertos = [];
 
@@ -110,28 +108,18 @@ btnenviar.onclick = function () {
     return aciertos;
   };
   let aciertosTotal = obtenerAciertos(combinacionGanadora, combinacionJugador);
-  const pintarAciertos = (aciertosTotal, combinacionJugador) => {
-    const pintarAciertos = [];
-    for (let i = 0; i < aciertosTotal.length; i++) {
-      if (aciertosTotal[i] === 1) {
-        pintarAciertos.push(combinacionJugador[i]);
-      } else {
-        pintarAciertos.push("");
-      }
-    }
-    return pintarAciertos;
-  };
-  const aciertosPintados = pintarAciertos(aciertosTotal, combinacionJugador);
-
-  console.log(aciertosPintados);
+  console.log(aciertosTotal);
 
   const existeGanador = (aciertosTotal, condicionGanadora) => {
+    console.log(condicionGanadora);
+    console.log(aciertosTotal);
     for (let i = 0; i < aciertosTotal.length; i++) {
       if (condicionGanadora[i] !== aciertosTotal[i]) {
         return false;
       }
+      console.log("ganaste");
+      return true;
     }
-    return true;
   };
-  console.log(existeGanador(aciertosPintados, condicionGanadora));
+  existeGanador(aciertosTotal, condicionGanadora);
 };
