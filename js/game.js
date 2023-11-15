@@ -29,8 +29,9 @@ colorEscogidoDos.onclick = function () {
   EscogidoDos = colorEscogidoDos.style.backgroundColor = "green";
   sessionStorage.setItem("colorEscogido", EscogidoDos);
 };
-colorEscogidoTres.onclick = function () {
-  EscogidoTres = colorEscogidoTres.style.backgroundColor = "blue";
+colorEscogidoTres.onclick = function (a , b) {
+  EscogidoTres = colorEscogidoTres.style.
+  backgroundColor = "blue";
   sessionStorage.setItem("colorEscogido", EscogidoTres);
 };
 colorEscogidoCuatro.onclick = function () {

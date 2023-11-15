@@ -1,0 +1,12 @@
+.contenedor-principal{
+    display: flex;
+    justify-content: center;
+}
+
+.coloresPrincipales div {
+display:inline-block;
+border: 2px solid black;
+border-radius: 50%;
+width: 4em;
+height: 4em;
+}

@@ -1,0 +1,83 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+.tablero-principal {
+    
+   
+    justify-content:space-around;
+    align-items: center;
+    
+}
+.contenedor-intentos{
+    display: flex;
+    margin: 1em;
+}
+.tablero-principal .intento {
+    display: flex;
+    justify-content: center;
+    width: 3em;
+    height: 3em;
+    border: 2px solid black;
+    border-radius: 50%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.posicion{
+    display: inline-block;
+    background-color: #ffffff;
+    border: 2px solid rgb(3, 3, 3);
+    width: 8em; 
+    height: 8em;
+}
+.color{
+    display: inline-block;
+    background-color: none;
+    border: 2px solid rgb(0, 0, 0);
+    width: 4em; 
+    height: 4em;
+    border-radius: 50%;
+}
+
+.color-uno {
+    display: inline-block;
+    background-color: red;
+    border: 2px solid rgb(0, 0, 0);
+    width: 4em; 
+    height: 4em;
+    border-radius: 50%;
+}
+.color-dos {
+    display: inline-block;
+    background-color: green;
+    border: 2px solid rgb(0, 0, 0);
+    width: 4em; 
+    height: 4em;
+    border-radius: 50%;
+}
+.color-tres {
+    display: inline-block;
+    background-color: blue;
+    border: 2px solid rgb(0, 0, 0);
+    width: 4em; 
+    height: 4em;
+    border-radius: 50%;
+}
+.color-cuatro {
+    display: inline-block;
+    background-color: yellow;
+    border: 2px solid rgb(0, 0, 0);
+    width: 4em; 
+    height: 4em;
+    border-radius: 50%;
+}
+.color-cinco {
+    display: inline-block;
+    background-color: orange;
+    border: 2px solid rgb(0, 0, 0);
+    width: 4em; 
+    height: 4em;
+    border-radius: 50%;
+}
