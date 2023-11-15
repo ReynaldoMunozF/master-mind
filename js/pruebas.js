@@ -19,6 +19,7 @@ const crearFilasIntentos = (numeroFilas, tableroJuego, intento) => {
     let numeroFila = document.createElement("div");
     numeroFila.setAttribute("id", "posicion-" + i + "-intento-" + intento);
     numeroFila.classList.add("intento");
+    numeroFila.classList.add("intento"+intento);
     contenedorFilas.appendChild(numeroFila);
   }
   tableroJuego.appendChild(contenedorFilas);
@@ -37,6 +38,7 @@ let colorEscogidoDos = document.getElementById("color-escogido-Dos");
 let colorEscogidoTres = document.getElementById("color-escogido-Tres");
 let colorEscogidoCuatro = document.getElementById("color-escogido-Cuatro");
 let colorEscogidoCinco = document.getElementById("color-escogido-Cinco");
+
 
 colorEscogidoUno.onclick = function () {
   EscogidoUno = colorEscogidoUno.style.backgroundColor = "red";
@@ -61,39 +63,45 @@ colorEscogidoCinco.onclick = function () {
 
 let combinacionJugador = [];
 
-let intento = document.querySelectorAll(".intento");
-const nuevoIntento = (numerofilas) => {
+let intentoJuego = 0;
+const nuevoIntento = (numerofilas , intentoJuego) => {
+  let intentoFinal = [];
+  for (let i = 0; i < 5; i++) {
+    let intento = document.querySelectorAll(".intento"+intentoJuego);
+    intentoFinal.push(intento[i]);
+    
+    }
   for (let i = 0; i < numerofilas; i++) {
-    intento[i].addEventListener("click", function () {
+    intentoFinal[i].addEventListener("click", function () {
       let posicionUnoFinal = sessionStorage.getItem("colorEscogido");
       combinacionJugador.splice(i, 1, posicionUnoFinal);
-      intento[i].style.backgroundColor = posicionUnoFinal;
+      intentoFinal[i].style.backgroundColor = posicionUnoFinal;
       sessionStorage.clear();
     });
   }
-
 };
-const existeGanador = (combinacionJugador, combinacionGanadora) => {
-  // console.log(combinacionGanadora);
-  // console.log(combinacionJugador);
+const existeGanador = (combinacionJugador, combinacionGanadora, ) => {
+ 
   for (let i = 0; i < combinacionJugador.length; i++) {
     if (combinacionGanadora[i] !== combinacionJugador[i]) {
       return false;
     }
-    console.log("ganaste");
     return true;
   }
+
 };
 
 const validar = document.getElementById("validar");
 
-nuevoIntento(numFilas);
+nuevoIntento(numFilas,intentoJuego);
+
 for (let i = 0; i < numIntentos; i++) {
+ 
   validar.addEventListener("click", function () {
     if (existeGanador(combinacionJugador, combinacionGanadora)) {
       alert("Ganaste");
     } else {
-      alert("Perdiste");
+        
     }
     console.log(combinacionJugador);
   });

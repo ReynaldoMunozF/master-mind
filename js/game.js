@@ -22,7 +22,7 @@ console.log(combinacionGanadora);
 
 //----------------------------------------------------------------
 colorEscogidoUno.onclick = function () {
-  EscogidoUno = colorEscogidoUno.style.backgroundColor = "red";
+  EscogidoUno = colorEscogidoUno.style.backgroundColor ;
   sessionStorage.setItem("colorEscogido", EscogidoUno);
 };
 colorEscogidoDos.onclick = function () {

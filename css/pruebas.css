@@ -12,6 +12,9 @@ body {
 .contenedor-intentos{
     display: flex;
     margin: 1em;
+    border-color: 3px solid black;
+    background-color: aquamarine;
+
 }
 .tablero-principal .intento {
     display: flex;
@@ -23,6 +26,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 0.3em;
     
 }
 .posicion{

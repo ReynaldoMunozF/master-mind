@@ -16,7 +16,7 @@
 
 .color-uno {
     display: inline-block;
-    background-color: red;
+    background-color: rgb(43, 0, 255);
     border: 2px solid rgb(0, 0, 0);
     width: 4em; 
     height: 4em;
