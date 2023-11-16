@@ -1,12 +1,17 @@
 .contenedor-principal{
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    gap: 1em;
+    align-items: center;
+    
 }
 
-.coloresPrincipales div {
-display:inline-block;
+.contenedor-intentos div {
+display: inline-block;
 border: 2px solid black;
 border-radius: 50%;
 width: 4em;
 height: 4em;
+margin: 0.1em;
 }

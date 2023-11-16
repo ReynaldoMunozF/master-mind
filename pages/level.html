@@ -1,18 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/level.css" />
     <title>Document</title>
-</head>
-<body>
-    <div class="contenedor-about">
-        <div class="about"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero cupiditate deleniti harum, labore est laborum aperiam et doloremque commodi, aspernatur omnis quae optio fuga nulla! Praesentium consequatur nisi quo sunt?</p></div>
-        <input id="nombreJugador" placeholder="Ingresa tu Nombre" maxlength="15">
-        <button id="lvlPrincipiante" >PRINCIPIANTE</button>
-        <button id="lvlIntermedio">INTERMEDIO</button>
-        <button id="lvlAvanzado">AVANZADO</button>
+  </head>
+  <body>
+    <div class="contenedor-lvl">
+      <div class="texto1">INGRESA TU NICKNAME
+      </div>
+      <input
+        id="nombreJugador"
+        
+        maxlength="15"
+      />
+      <div class="texto2">SELECCIONA TU NIVEL
+    </div>
+      <button id="lvlPrincipiante">
+        PRINCIPIANTE <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <button id="lvlIntermedio">
+        INTERMEDIO <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <button id="lvlAvanzado">
+        AVANZADO <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
     <script src="../js/level.js"></script>
-</body>
+  </body>
 </html>

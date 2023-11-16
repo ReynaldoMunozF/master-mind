@@ -1,5 +1,5 @@
 let tablero = document.getElementById("tablero-principal");
-let numFilas = 5;
+let numFilas = 5; //cambiar por numero de colores
 let numIntentos = 8;
 const combinacionColores = ["red", "green", "blue", "yellow", "orange"];
 // crear combinacion ganadora
@@ -7,8 +7,6 @@ const combinacionColores = ["red", "green", "blue", "yellow", "orange"];
 const obtenerCombinacionGanadora = (combinacionColores) => {
   return combinacionColores.sort(() => Math.random() - 0.5);
 };
-const combinacionGanadora = obtenerCombinacionGanadora(combinacionColores);
-console.log(combinacionGanadora);
 
 //-------------------------------------------------------------------------------->
 
@@ -19,7 +17,7 @@ const crearFilasIntentos = (numeroFilas, tableroJuego, intento) => {
     let numeroFila = document.createElement("div");
     numeroFila.setAttribute("id", "posicion-" + i + "-intento-" + intento);
     numeroFila.classList.add("intento");
-    numeroFila.classList.add("intento"+intento);
+    numeroFila.classList.add("intento" + intento);
     contenedorFilas.appendChild(numeroFila);
   }
   tableroJuego.appendChild(contenedorFilas);
@@ -31,6 +29,37 @@ const crearTableroIntentos = (numeroIntentos, numFilas, tablero) => {
     crearFilasIntentos(numFilas, tablero, i);
   }
 };
+
+const nuevoIntento = (numeroDeColores, intentoJuego) => {
+  let intento = document.querySelectorAll(".intento" + intentoJuego);
+  let intentoJugado = [];
+  for (let i = 0; i < numeroDeColores; i++) {
+    intento[i].addEventListener("click", function () {
+      let colorEscogido = sessionStorage.getItem("colorEscogido");
+      intentoJugado.splice(i, 1, colorEscogido);
+      intento[i].style.backgroundColor = colorEscogido;
+      sessionStorage.clear();
+    });
+  }
+  return intentoJugado;
+};
+
+const existeGanador = (combinacionJugador, combinacionGanadora) => {
+  for (let i = 0; i < combinacionGanadora.length; i++) {
+    if (combinacionGanadora[i] !== combinacionJugador[i]) {
+      return false;
+    }
+  }
+  return true;
+};
+
+// Crea el array random
+//--------------------------------------------------------->
+const combinacionGanadora = obtenerCombinacionGanadora(combinacionColores);
+console.log(combinacionGanadora);
+
+// Crea tablero de jego
+//--------------------------------------------------------->
 crearTableroIntentos(numIntentos, numFilas, tablero);
 
 let colorEscogidoUno = document.getElementById("color-escogido-Uno");
@@ -38,7 +67,6 @@ let colorEscogidoDos = document.getElementById("color-escogido-Dos");
 let colorEscogidoTres = document.getElementById("color-escogido-Tres");
 let colorEscogidoCuatro = document.getElementById("color-escogido-Cuatro");
 let colorEscogidoCinco = document.getElementById("color-escogido-Cinco");
-
 
 colorEscogidoUno.onclick = function () {
   EscogidoUno = colorEscogidoUno.style.backgroundColor = "red";
@@ -61,48 +89,25 @@ colorEscogidoCinco.onclick = function () {
   sessionStorage.setItem("colorEscogido", EscogidoCinco);
 };
 
-let combinacionJugador = [];
+let validar = document.getElementById("validar");
+let numIntento = 0;
+let esJugadaGanadora = false;
 
-let intentoJuego = 0;
-const nuevoIntento = (numerofilas , intentoJuego) => {
-  let intentoFinal = [];
-  for (let i = 0; i < 5; i++) {
-    let intento = document.querySelectorAll(".intento"+intentoJuego);
-    intentoFinal.push(intento[i]);
-    
-    }
-  for (let i = 0; i < numerofilas; i++) {
-    intentoFinal[i].addEventListener("click", function () {
-      let posicionUnoFinal = sessionStorage.getItem("colorEscogido");
-      combinacionJugador.splice(i, 1, posicionUnoFinal);
-      intentoFinal[i].style.backgroundColor = posicionUnoFinal;
-      sessionStorage.clear();
-    });
+let combinacionJugador = nuevoIntento(numFilas, numIntento);
+validar.addEventListener("click", function () {
+  console.log(numIntento);
+  if (combinacionJugador.length == 0) {
+    return;
   }
-};
-const existeGanador = (combinacionJugador, combinacionGanadora, ) => {
- 
-  for (let i = 0; i < combinacionJugador.length; i++) {
-    if (combinacionGanadora[i] !== combinacionJugador[i]) {
-      return false;
-    }
-    return true;
+  console.log(combinacionJugador);
+  console.log(combinacionGanadora);
+  esJugadaGanadora = existeGanador(combinacionJugador, combinacionGanadora);
+  if (esJugadaGanadora) {
+    alert("Ganaste");
+  } else {
+    alert("sigue intentando");
+    numIntento++;
+    combinacionJugador = nuevoIntento(numFilas,numIntento)
   }
+});
 
-};
-
-const validar = document.getElementById("validar");
-
-nuevoIntento(numFilas,intentoJuego);
-
-for (let i = 0; i < numIntentos; i++) {
- 
-  validar.addEventListener("click", function () {
-    if (existeGanador(combinacionJugador, combinacionGanadora)) {
-      alert("Ganaste");
-    } else {
-        
-    }
-    console.log(combinacionJugador);
-  });
-}
