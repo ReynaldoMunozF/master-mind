@@ -1,7 +1,8 @@
 let tablero = document.getElementById("tablero-principal");
-let numFilas = 5; //cambiar por numero de colores
+let numFilas = 4; //cambiar por numero de colores
 let numIntentos = 8;
-const combinacionColores = ["red", "green", "blue", "yellow", "orange"];
+const combinacionColores = ["red", "green", "blue", "yellow"];
+let tableroAciertos = document.getElementById("tablero-aciertos");
 // crear combinacion ganadora
 //-------------------------------------------------------------------------------->
 const obtenerCombinacionGanadora = (combinacionColores) => {
@@ -23,11 +24,36 @@ const crearFilasIntentos = (numeroFilas, tableroJuego, intento) => {
   tableroJuego.appendChild(contenedorFilas);
 };
 
-//crearFilasIntentos(numFilas,tablero)
+const crearFilasAciertos = (numeroFilas, tableroJuego, intento) => {
+  let contenedorFilas = document.createElement("div");
+  contenedorFilas.classList.add("contenedor-intentos");
+  for (let i = 0; i < numeroFilas; i++) {
+    let numeroFila = document.createElement("div");
+    numeroFila.setAttribute("id", "posicion-" + i + "-intento-" + intento);
+  numeroFila.classList.add("intento");
+    numeroFila.classList.add("acierto" + intento);
+    contenedorFilas.appendChild(numeroFila);
+  }
+  tableroJuego.appendChild(contenedorFilas);
+};
+
+
+
 const crearTableroIntentos = (numeroIntentos, numFilas, tablero) => {
   for (let i = 0; i < numeroIntentos; i++) {
     crearFilasIntentos(numFilas, tablero, i);
   }
+};
+const crearTableroAciertos = (numeroIntentos, numFilas, tablero) => {
+  for (let i = 0; i < numeroIntentos; i++) {
+    crearFilasAciertos(numFilas, tablero, i);
+  }
+};
+crearTableroAciertos(numIntentos, numFilas, tableroAciertos);
+
+const agruparAciertos = (aciertosJuego) => {
+  let acierto = document.querySelectorAll(".acierto" + aciertosJuego);
+  return acierto;
 };
 
 const nuevoIntento = (numeroDeColores, intentoJuego) => {
@@ -51,6 +77,17 @@ const existeGanador = (combinacionJugador, combinacionGanadora) => {
     }
   }
   return true;
+};
+const aciertos = (combinacionJugador, combinacionGanadora) => {
+  let pintarAciertos = [];
+  for (let i = 0; i < combinacionGanadora.length; i++) {
+    if (combinacionGanadora[i] == combinacionJugador[i]) {
+      pintarAciertos.push(1);
+    } else {
+      pintarAciertos.push(0);
+    }
+  }
+  return pintarAciertos;
 };
 
 // Crea el array random
@@ -89,25 +126,41 @@ colorEscogidoCinco.onclick = function () {
   sessionStorage.setItem("colorEscogido", EscogidoCinco);
 };
 
+const verificarAciertos = (aciertosAgrupados, confirmarAciertos) => {
+  for (let i = 0; i < aciertosAgrupados.length; i++) {
+    if (confirmarAciertos[i] == 1) {
+      aciertosAgrupados[i].style.backgroundColor = "white";
+    } else {
+      aciertosAgrupados[i].style.backgroundColor = "black";
+    }
+  }
+};
+
+
+
 let validar = document.getElementById("validar");
 let numIntento = 0;
 let esJugadaGanadora = false;
 
 let combinacionJugador = nuevoIntento(numFilas, numIntento);
+let aciertosAgrupados = agruparAciertos(numIntento);
+
 validar.addEventListener("click", function () {
   console.log(numIntento);
   if (combinacionJugador.length == 0) {
     return;
   }
-  console.log(combinacionJugador);
-  console.log(combinacionGanadora);
+  
   esJugadaGanadora = existeGanador(combinacionJugador, combinacionGanadora);
+  let pintarAciertos = aciertos(combinacionJugador, combinacionGanadora);
+  
+  verificarAciertos(aciertosAgrupados, pintarAciertos);
   if (esJugadaGanadora) {
     alert("Ganaste");
   } else {
-    alert("sigue intentando");
+    
     numIntento++;
-    combinacionJugador = nuevoIntento(numFilas,numIntento)
+    combinacionJugador = nuevoIntento(numFilas, numIntento);
+    aciertosAgrupados = agruparAciertos(numIntento);
   }
 });
-
