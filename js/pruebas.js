@@ -1,8 +1,9 @@
 let tablero = document.getElementById("tablero-principal");
 let numFilas = 4; //cambiar por numero de colores
-let numIntentos = 8;
-const combinacionColores = ["red", "green", "blue", "yellow"];
+let numIntentos = 10;
+const combinacionColores = JSON.parse(sessionStorage.getItem("coloresJugar"));
 let tableroAciertos = document.getElementById("tablero-aciertos");
+let tableroColores = document.getElementById("colores-escogidos");
 // crear combinacion ganadora
 //-------------------------------------------------------------------------------->
 const obtenerCombinacionGanadora = (combinacionColores) => {
@@ -26,18 +27,16 @@ const crearFilasIntentos = (numeroFilas, tableroJuego, intento) => {
 
 const crearFilasAciertos = (numeroFilas, tableroJuego, intento) => {
   let contenedorFilas = document.createElement("div");
-  contenedorFilas.classList.add("contenedor-intentos");
+  contenedorFilas.classList.add("contenedor-intentos" );
   for (let i = 0; i < numeroFilas; i++) {
     let numeroFila = document.createElement("div");
     numeroFila.setAttribute("id", "posicion-" + i + "-intento-" + intento);
-  numeroFila.classList.add("intento");
+    numeroFila.classList.add("intento");
     numeroFila.classList.add("acierto" + intento);
     contenedorFilas.appendChild(numeroFila);
   }
   tableroJuego.appendChild(contenedorFilas);
 };
-
-
 
 const crearTableroIntentos = (numeroIntentos, numFilas, tablero) => {
   for (let i = 0; i < numeroIntentos; i++) {
@@ -62,7 +61,7 @@ const nuevoIntento = (numeroDeColores, intentoJuego) => {
   for (let i = 0; i < numeroDeColores; i++) {
     intento[i].addEventListener("click", function () {
       let colorEscogido = sessionStorage.getItem("colorEscogido");
-      intentoJugado.splice(i, 1, colorEscogido);
+      intentoJugado[i] = colorEscogido;
       intento[i].style.backgroundColor = colorEscogido;
       sessionStorage.clear();
     });
@@ -98,33 +97,53 @@ console.log(combinacionGanadora);
 // Crea tablero de jego
 //--------------------------------------------------------->
 crearTableroIntentos(numIntentos, numFilas, tablero);
+//--------------------------------------------------------->
+//--------------------------------------------------------->
+//--------------------------------------------------------->
+//--------------------------------------------------------->
 
-let colorEscogidoUno = document.getElementById("color-escogido-Uno");
-let colorEscogidoDos = document.getElementById("color-escogido-Dos");
-let colorEscogidoTres = document.getElementById("color-escogido-Tres");
-let colorEscogidoCuatro = document.getElementById("color-escogido-Cuatro");
-let colorEscogidoCinco = document.getElementById("color-escogido-Cinco");
+const crearFilasColores = (numeroFilas, tableroJuego) => {
+  let contenedorFilas = document.createElement("div");
+  contenedorFilas.classList.add("contenedor-colores");
+  for (let i = 0; i < numeroFilas; i++) {
+    let numeroFila = document.createElement("div");
+    numeroFila.setAttribute("id", "posicion-" + i );
+    numeroFila.classList.add("intento");
+    numeroFila.classList.add("color"+0);
+    contenedorFilas.appendChild(numeroFila);
+  }
+  tableroJuego.appendChild(contenedorFilas);
+};
+crearFilasColores(numFilas, tableroColores)
 
-colorEscogidoUno.onclick = function () {
-  EscogidoUno = colorEscogidoUno.style.backgroundColor = "red";
-  sessionStorage.setItem("colorEscogido", EscogidoUno);
-};
-colorEscogidoDos.onclick = function () {
-  EscogidoDos = colorEscogidoDos.style.backgroundColor = "green";
-  sessionStorage.setItem("colorEscogido", EscogidoDos);
-};
-colorEscogidoTres.onclick = function () {
-  EscogidoTres = colorEscogidoTres.style.backgroundColor = "blue";
-  sessionStorage.setItem("colorEscogido", EscogidoTres);
-};
-colorEscogidoCuatro.onclick = function () {
-  EscogidoCuatro = colorEscogidoCuatro.style.backgroundColor = "yellow";
-  sessionStorage.setItem("colorEscogido", EscogidoCuatro);
-};
-colorEscogidoCinco.onclick = function () {
-  EscogidoCinco = colorEscogidoCinco.style.backgroundColor = "orange";
-  sessionStorage.setItem("colorEscogido", EscogidoCinco);
-};
+let contenedorColores = document.querySelectorAll(".color0");
+let recogerColores = JSON.parse(sessionStorage.getItem("coloresJugar"));
+console.log(recogerColores);
+
+
+
+for (let i = 0; i < contenedorColores.length; i++) {
+  contenedorColores[i].style.backgroundColor = recogerColores[i];
+}
+
+contenedorColores[0].addEventListener("click", function () {
+let color0 = contenedorColores[0].style.backgroundColor;
+sessionStorage.setItem("colorEscogido", color0)
+})  
+contenedorColores[1].addEventListener("click", function () {
+let color0 = contenedorColores[1].style.backgroundColor;
+sessionStorage.setItem("colorEscogido", color0)
+})  
+contenedorColores[2].addEventListener("click", function () {
+let color0 = contenedorColores[2].style.backgroundColor;
+sessionStorage.setItem("colorEscogido", color0)
+})  
+contenedorColores[3].addEventListener("click", function () {
+let color0 = contenedorColores[3].style.backgroundColor;
+sessionStorage.setItem("colorEscogido", color0)
+})  
+
+
 
 const verificarAciertos = (aciertosAgrupados, confirmarAciertos) => {
   for (let i = 0; i < aciertosAgrupados.length; i++) {
@@ -135,8 +154,6 @@ const verificarAciertos = (aciertosAgrupados, confirmarAciertos) => {
     }
   }
 };
-
-
 
 let validar = document.getElementById("validar");
 let numIntento = 0;
@@ -150,15 +167,15 @@ validar.addEventListener("click", function () {
   if (combinacionJugador.length == 0) {
     return;
   }
-  
+  console.log(combinacionJugador);
+
   esJugadaGanadora = existeGanador(combinacionJugador, combinacionGanadora);
   let pintarAciertos = aciertos(combinacionJugador, combinacionGanadora);
-  
+
   verificarAciertos(aciertosAgrupados, pintarAciertos);
   if (esJugadaGanadora) {
     alert("Ganaste");
   } else {
-    
     numIntento++;
     combinacionJugador = nuevoIntento(numFilas, numIntento);
     aciertosAgrupados = agruparAciertos(numIntento);

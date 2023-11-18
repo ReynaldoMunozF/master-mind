@@ -1,54 +1,178 @@
 body {
     display: flex;
     justify-content: center;
+    background-color: black;
+    margin: 0;
 }
-.tablero-principal {
-    
-   width: 30em;
-    justify-content:space-around;
+.container-principal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     
 }
+.tablero-principal {
+   
+ display: flex;   
+ flex-direction: column;
+ 
+    
+}
+.imagen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10em;
+}
+img {
+    
+    width: 20em;
+   
+}
+.texto {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 1em;
+}
+.juego {
+    display: flex;
+    flex-direction: row;
+    
+    
+   
+    border: 2px solid black;
+    border-radius: 50%;
+    
+   
+}
 .contenedor-intentos{
     display: flex;
-    margin: 1em;
+    
     border-color: 3px solid black;
-    background-color: aquamarine;
+    
+    border: 2px solid rgb(88, 87, 87);
+    border-radius: 20px;
+    animation-name: sombra;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+    
+}
 
+@keyframes sombra{
+    0%{
+        filter: drop-shadow(5px 3px 3px rgb(240, 51, 51));
+    }
+    25%{
+        filter: drop-shadow(5px 3px 3px rgb(193, 35, 232));
+    }
+    50%{
+        filter: drop-shadow(5px 3px 3px rgb(234, 240, 51));
+    }
+    75%{
+        filter: drop-shadow(5px 3px 3px rgb(58, 232, 35));
+    }
+    100%{
+        filter: drop-shadow(5px 3px 3px rgb(77, 132, 249));
+    }
 }
 .tablero-principal .intento {
     display: flex;
     justify-content: center;
-    width: 3em;
-    height: 3em;
-    border: 2px solid black;
+    width: 4em;
+    height: 4em;
+    border: 1px solid rgb(60, 60, 60);
     border-radius: 50%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    margin-top: 2em;
     margin: 0.3em;
+    animation-name: sombra;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
     
+    
+}
+@media (max-width: 500px) {
+    .tablero-principal .intento {
+        width: 2.5em;
+        height: 2.5em;
+        margin: 0.1em;
+    }
+}
+
+@keyframes sombra{
+    0%{
+        filter: drop-shadow(5px 3px 3px rgb(240, 51, 51));
+    }
+    25%{
+        filter: drop-shadow(5px 3px 3px rgb(193, 35, 232));
+    }
+    50%{
+        filter: drop-shadow(5px 3px 3px rgb(234, 240, 51));
+    }
+    75%{
+        filter: drop-shadow(5px 3px 3px rgb(58, 232, 35));
+    }
+    100%{
+        filter: drop-shadow(5px 3px 3px rgb(77, 132, 249));
+    }
 }
 .tablero-aciertos{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-  
+    justify-content:space-between;
+    
+    
 }
 .tablero-aciertos .intento {
     display: flex;
     justify-content: center;
-    width: 2em;
-    height: 2em;
-    border: 2px solid black;
+    border: 1px solid rgb(68, 67, 67);
+    width: 1em;
+    height: 1em;
+    
     border-radius: 50%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
-    
+    animation-name: sombra;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
     
 }
+
+@keyframes sombra{
+    0%{
+        filter: drop-shadow(5px 3px 3px rgb(240, 51, 51));
+    }
+    25%{
+        filter: drop-shadow(5px 3px 3px rgb(193, 35, 232));
+    }
+    50%{
+        filter: drop-shadow(5px 3px 3px rgb(234, 240, 51));
+    }
+    75%{
+        filter: drop-shadow(5px 3px 3px rgb(58, 232, 35));
+    }
+    100%{
+        filter: drop-shadow(5px 3px 3px rgb(77, 132, 249));
+    }
+}
+.contenedor-colores{
+    display: flex;
+    margin-top: 1em;
+}
+.contenedor-colores .intento{
+    
+    justify-content: center;
+    width: 4em;
+    height: 4em;
+    border: 1px solid rgb(60, 60, 60);
+    border-radius: 15px;
+    margin-top: 2em;
+    margin: 0.3em;
+}
+
 .posicion{
     display: inline-block;
     background-color: #ffffff;
@@ -69,39 +193,97 @@ body {
     display: inline-block;
     background-color: red;
     border: 2px solid rgb(0, 0, 0);
-    width: 4em; 
-    height: 4em;
+    width: 3em; 
+    height: 3em;
     border-radius: 50%;
+    box-shadow: 0px 2px 2px 1px white ;
+}
+.color-uno:active{
+    width: 2.8em; 
+    height: 2.8em;
+   
 }
 .color-dos {
     display: inline-block;
     background-color: green;
     border: 2px solid rgb(0, 0, 0);
-    width: 4em; 
-    height: 4em;
+    width: 3em; 
+    height: 3em;
     border-radius: 50%;
+    
 }
 .color-tres {
     display: inline-block;
     background-color: blue;
     border: 2px solid rgb(0, 0, 0);
-    width: 4em; 
-    height: 4em;
+    width: 3em; 
+    height: 3em;
     border-radius: 50%;
 }
 .color-cuatro {
     display: inline-block;
     background-color: yellow;
     border: 2px solid rgb(0, 0, 0);
-    width: 4em; 
-    height: 4em;
+    width: 3em; 
+    height: 3em;
     border-radius: 50%;
 }
 .color-cinco {
     display: inline-block;
     background-color: orange;
     border: 2px solid rgb(0, 0, 0);
-    width: 4em; 
-    height: 4em;
+    width: 3em; 
+    height: 3em;
     border-radius: 50%;
+}
+
+.contenedor-intentos0{
+    display: flex;
+    position: relative;
+    top: 1em;
+}
+.contenedor-intentos1{
+    display: flex;
+    position: relative;
+    top: 0.6em;
+}
+.contenedor-intentos2{
+    display: flex;
+    position: relative;
+    top: 0.4em;
+}
+.contenedor-intentos3{
+    display: flex;
+    position: relative;
+    top: 0.4em;
+}
+.contenedor-intentos4{
+    display: flex;
+    position: relative;
+    top: 0.2em;
+}
+.contenedor-intentos5{
+    display: flex;
+    position: relative;
+    top: 0em;
+}
+.contenedor-intentos6{
+    display: flex;
+    position: relative;
+    top: -0.3em;
+}
+.contenedor-intentos7{
+    display: flex;
+    position: relative;
+    top: -0.4em;
+}
+.contenedor-intentos8{
+    display: flex;
+    position: relative;
+    top: -0.7em;
+}
+.contenedor-intentos9{
+    display: flex;
+    position: relative;
+    top: -0.8em;
 }
