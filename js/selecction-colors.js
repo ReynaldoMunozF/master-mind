@@ -3,38 +3,11 @@ let tableroColores = document.getElementById("coloresEscoger");
 let numFilas = sessionStorage.getItem("cantidadColores");
 numFilas = parseInt(numFilas);
 let numColores = 10;
-let coloresPrincipales = [
-  "black",
-  "red",
-  "green",
-  "yellow",
-  "orange",
-  "blue",
-  "pink",
-  "purple",
-  "brown",
-  "grey",
-  "lime",
-  "maroon",
-  "navy",
-  "olive",
-  "teal",
-  "aqua",
-  "teal",
-];
-
-const obtenerColoresAleatorios = (coloresPrincipales) => {
-  return coloresPrincipales.sort(() => Math.random() - 0.5);
-};
-
-let obtenerColoresAleatoriosFinal =
-  obtenerColoresAleatorios(coloresPrincipales);
-
-console.log(obtenerColoresAleatoriosFinal);
 
 let nombreJugador = document.getElementById("nombreJugador");
 let recibirNombreJugador = sessionStorage.getItem("nombreJugador");
-nombreJugador.innerHTML = `${recibirNombreJugador} selecciona los colores para jugar: `;
+recibirNombreJugador.toUpperCase(recibirNombreJugador)
+nombreJugador.innerHTML = `${recibirNombreJugador} `;
 
 const crearFilasIntentos = (numeroFilas, tableroJuego) => {
   let contenedorFilas = document.createElement("div");
@@ -73,33 +46,26 @@ const crearFilasColores = (numeroFilas, tableroJuego, intento) => {
   tableroJuego.appendChild(contenedorFilas);
 };
 
-//crearFilasColores(numColores, tableroColores,0);
-
 let contenedorColores = document.querySelectorAll(".color0");
 console.log(contenedorColores);
-
-// const asignarColores = (contenedorColores,coloresPrincipales) => {
-//   for (let i = 0; i < contenedorColores.length; i++) {
-//     contenedorColores[i].style.backgroundColor = coloresPrincipales[i];
-//   }
-// }
-
-// asignarColores(contenedorColores,obtenerColoresAleatoriosFinal);
 
 let inputColores = document.querySelectorAll(".color0");
 let filaColores = document.querySelectorAll(".intento");
 let coloresJugar = [];
-for (let i =0; i < filaColores.length; i++) {
-inputColores[i].addEventListener("input", function () {
-  let colorInput = inputColores[i].value;
-  filaColores[i].style.backgroundColor = colorInput;
-  let colorRgb = getComputedStyle(filaColores[i]).getPropertyValue("background-color");
-  coloresJugar[i] = colorRgb;
-})};
+for (let i = 0; i < filaColores.length; i++) {
+  inputColores[i].addEventListener("input", function () {
+    let colorInput = inputColores[i].value;
+    filaColores[i].style.backgroundColor = colorInput;
+    let colorRgb = getComputedStyle(filaColores[i]).getPropertyValue(
+      "background-color"
+    );
+    coloresJugar[i] = colorRgb;
+  });
+}
 console.log(coloresJugar);
-let btnEnviar= document.getElementById("enviar");
+let btnEnviar = document.getElementById("enviar");
 
 btnEnviar.addEventListener("click", function () {
-sessionStorage.setItem("coloresJugar", JSON.stringify(coloresJugar));
-location.href = "./pruebas.html";
+  sessionStorage.setItem("coloresJugar", JSON.stringify(coloresJugar));
+  location.href = "./pruebas.html";
 });

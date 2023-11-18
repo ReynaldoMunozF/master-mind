@@ -1,6 +1,8 @@
 let tablero = document.getElementById("tablero-principal");
-let numFilas = 4; //cambiar por numero de colores
-let numIntentos = 10;
+let numFilas = sessionStorage.getItem("cantidadColores");
+numFilas = parseInt(numFilas); //cambiar por numero de colores
+let numIntentos = sessionStorage.getItem("intentos");
+numIntentos = parseInt(numIntentos);
 const combinacionColores = JSON.parse(sessionStorage.getItem("coloresJugar"));
 let tableroAciertos = document.getElementById("tablero-aciertos");
 let tableroColores = document.getElementById("colores-escogidos");
@@ -63,7 +65,7 @@ const nuevoIntento = (numeroDeColores, intentoJuego) => {
       let colorEscogido = sessionStorage.getItem("colorEscogido");
       intentoJugado[i] = colorEscogido;
       intento[i].style.backgroundColor = colorEscogido;
-      sessionStorage.clear();
+      sessionStorage.removeItem("colorEscogido");
     });
   }
   return intentoJugado;
@@ -140,6 +142,14 @@ sessionStorage.setItem("colorEscogido", color0)
 })  
 contenedorColores[3].addEventListener("click", function () {
 let color0 = contenedorColores[3].style.backgroundColor;
+sessionStorage.setItem("colorEscogido", color0)
+})  
+contenedorColores[4].addEventListener("click", function () {
+let color0 = contenedorColores[4].style.backgroundColor;
+sessionStorage.setItem("colorEscogido", color0)
+})  
+contenedorColores[5].addEventListener("click", function () {
+let color0 = contenedorColores[5].style.backgroundColor;
 sessionStorage.setItem("colorEscogido", color0)
 })  
 

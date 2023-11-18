@@ -2,17 +2,14 @@ body{
     display: flex;
     background-color: rgb(15, 9, 9);
     justify-content: center;
-    margin-top: 6em;
+   
 }
 
 .container-principal {
     display: flex;
-   
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
-    
     width: 40em ;
     height: 40em ;
 }
