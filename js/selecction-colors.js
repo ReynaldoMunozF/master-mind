@@ -6,7 +6,7 @@ let numColores = 10;
 
 let nombreJugador = document.getElementById("nombreJugador");
 let recibirNombreJugador = sessionStorage.getItem("nombreJugador");
-recibirNombreJugador.toUpperCase(recibirNombreJugador)
+recibirNombreJugador.toUpperCase(recibirNombreJugador);
 nombreJugador.innerHTML = `${recibirNombreJugador} `;
 
 const crearFilasIntentos = (numeroFilas, tableroJuego) => {
@@ -47,7 +47,6 @@ const crearFilasColores = (numeroFilas, tableroJuego, intento) => {
 };
 
 let contenedorColores = document.querySelectorAll(".color0");
-
 
 let inputColores = document.querySelectorAll(".color0");
 let filaColores = document.querySelectorAll(".intento");

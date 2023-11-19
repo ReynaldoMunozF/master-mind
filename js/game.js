@@ -7,6 +7,10 @@ const combinacionColores = JSON.parse(sessionStorage.getItem("coloresJugar"));
 let tableroAciertos = document.getElementById("tablero-aciertos");
 let tableroColores = document.getElementById("colores-escogidos");
 
+let NombreJugador = document.getElementById("nombreJugador");
+let nombre = sessionStorage.getItem("nombreJugador");
+nombreJugador.innerHTML = nombre;
+
 // crear combinacion ganadora
 //-------------------------------------------------------------------------------->
 const obtenerCombinacionGanadora = (combinacionColores) => {
@@ -100,7 +104,6 @@ btnHome.addEventListener("click", function () {
 //--------------------------------------------------------->
 const combinacionGanadora = obtenerCombinacionGanadora(combinacionColores);
 
-
 // Crea tablero de jego
 //--------------------------------------------------------->
 crearTableroIntentos(numIntentos, numFilas, tablero);
@@ -122,7 +125,6 @@ crearFilasColores(numFilas, tableroColores);
 
 let contenedorColores = document.querySelectorAll(".color0");
 let recogerColores = JSON.parse(sessionStorage.getItem("coloresJugar"));
-
 
 for (let i = 0; i < contenedorColores.length; i++) {
   contenedorColores[i].style.backgroundColor = recogerColores[i];
@@ -151,11 +153,9 @@ let combinacionJugador = nuevoIntento(numFilas, numIntento);
 let aciertosAgrupados = agruparAciertos(numIntento);
 
 validar.addEventListener("click", function () {
-
   if (combinacionJugador.length == 0) {
     return;
   }
-
 
   esJugadaGanadora = existeGanador(combinacionJugador, combinacionGanadora);
   let pintarAciertos = aciertos(combinacionJugador, combinacionGanadora);
