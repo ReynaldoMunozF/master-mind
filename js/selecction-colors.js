@@ -47,7 +47,7 @@ const crearFilasColores = (numeroFilas, tableroJuego, intento) => {
 };
 
 let contenedorColores = document.querySelectorAll(".color0");
-console.log(contenedorColores);
+
 
 let inputColores = document.querySelectorAll(".color0");
 let filaColores = document.querySelectorAll(".intento");
@@ -62,7 +62,7 @@ for (let i = 0; i < filaColores.length; i++) {
     coloresJugar[i] = colorRgb;
   });
 }
-console.log(coloresJugar);
+
 let btnEnviar = document.getElementById("enviar");
 
 btnEnviar.addEventListener("click", function () {

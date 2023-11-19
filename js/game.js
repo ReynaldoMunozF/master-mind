@@ -99,7 +99,7 @@ btnHome.addEventListener("click", function () {
 // Crea el array random
 //--------------------------------------------------------->
 const combinacionGanadora = obtenerCombinacionGanadora(combinacionColores);
-console.log(combinacionGanadora);
+
 
 // Crea tablero de jego
 //--------------------------------------------------------->
@@ -122,7 +122,7 @@ crearFilasColores(numFilas, tableroColores);
 
 let contenedorColores = document.querySelectorAll(".color0");
 let recogerColores = JSON.parse(sessionStorage.getItem("coloresJugar"));
-console.log(recogerColores);
+
 
 for (let i = 0; i < contenedorColores.length; i++) {
   contenedorColores[i].style.backgroundColor = recogerColores[i];
@@ -151,11 +151,11 @@ let combinacionJugador = nuevoIntento(numFilas, numIntento);
 let aciertosAgrupados = agruparAciertos(numIntento);
 
 validar.addEventListener("click", function () {
-  console.log(numIntento);
+
   if (combinacionJugador.length == 0) {
     return;
   }
-  console.log(combinacionJugador);
+
 
   esJugadaGanadora = existeGanador(combinacionJugador, combinacionGanadora);
   let pintarAciertos = aciertos(combinacionJugador, combinacionGanadora);

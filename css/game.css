@@ -415,4 +415,5 @@ animation-iteration-count: infinite;
 }
 .botones {
     display: flex;
+    gap: 4em;
 }

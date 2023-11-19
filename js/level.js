@@ -8,7 +8,7 @@ btnPrincipiante.addEventListener("click", function () {
   if (nombreJugador !== "") {
     sessionStorage.setItem("nombreJugador", nombreJugador);
     sessionStorage.setItem("nivel", "principiante");
-    sessionStorage.setItem("intentos", "9");
+    sessionStorage.setItem("intentos", "8");
     sessionStorage.setItem("cantidadColores", "4");
     location.href = "./selecction-colors.html";
   } else {
