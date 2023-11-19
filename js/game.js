@@ -1,126 +1,205 @@
-let colorEscogidoUno = document.getElementById("color-escogido-Uno");
-let colorEscogidoDos = document.getElementById("color-escogido-Dos");
-let colorEscogidoTres = document.getElementById("color-escogido-Tres");
-let colorEscogidoCuatro = document.getElementById("color-escogido-Cuatro");
-let colorEscogidoCinco = document.getElementById("color-escogido-Cinco");
-//----------------------------------------------------------------
-let posicionUno = document.getElementById("posicion-uno");
-let posicionDos = document.getElementById("posicion-dos");
-let posicionTres = document.getElementById("posicion-tres");
-let posicionCuatro = document.getElementById("posicion-cuatro");
-let posicionCinco = document.getElementById("posicion-cinco");
-//----------------------------------------------------------------
-let btnenviar = document.getElementById("enviar");
+let tablero = document.getElementById("tablero-principal");
+let numFilas = sessionStorage.getItem("cantidadColores");
+numFilas = parseInt(numFilas); //cambiar por numero de colores
+let numIntentos = sessionStorage.getItem("intentos");
+numIntentos = parseInt(numIntentos);
+const combinacionColores = JSON.parse(sessionStorage.getItem("coloresJugar"));
+let tableroAciertos = document.getElementById("tablero-aciertos");
+let tableroColores = document.getElementById("colores-escogidos");
 
-//-------------------- GENERO COMBINACION RANDOM -----------------
-const combinacionColores = ["red", "green", "blue", "yellow", "orange"];
+
+
+// crear combinacion ganadora
+//-------------------------------------------------------------------------------->
 const obtenerCombinacionGanadora = (combinacionColores) => {
   return combinacionColores.sort(() => Math.random() - 0.5);
 };
+
+//-------------------------------------------------------------------------------->
+
+const crearFilasIntentos = (numeroFilas, tableroJuego, intento) => {
+  let contenedorFilas = document.createElement("div");
+  contenedorFilas.classList.add("contenedor-intentos");
+  for (let i = 0; i < numeroFilas; i++) {
+    let numeroFila = document.createElement("div");
+    numeroFila.setAttribute("id", "posicion-" + i + "-intento-" + intento);
+    numeroFila.classList.add("intento");
+    numeroFila.classList.add("intento" + intento);
+    contenedorFilas.appendChild(numeroFila);
+  }
+  tableroJuego.appendChild(contenedorFilas);
+};
+
+const crearFilasAciertos = (numeroFilas, tableroJuego, intento) => {
+  let contenedorFilas = document.createElement("div");
+  contenedorFilas.classList.add("contenedor-intentos" );
+  for (let i = 0; i < numeroFilas; i++) {
+    let numeroFila = document.createElement("div");
+    numeroFila.setAttribute("id", "posicion-" + i + "-intento-" + intento);
+    numeroFila.classList.add("intento");
+    numeroFila.classList.add("acierto" + intento);
+    contenedorFilas.appendChild(numeroFila);
+  }
+  tableroJuego.appendChild(contenedorFilas);
+};
+
+const crearTableroIntentos = (numeroIntentos, numFilas, tablero) => {
+  for (let i = 0; i < numeroIntentos; i++) {
+    crearFilasIntentos(numFilas, tablero, i);
+  }
+};
+const crearTableroAciertos = (numeroIntentos, numFilas, tablero) => {
+  for (let i = 0; i < numeroIntentos; i++) {
+    crearFilasAciertos(numFilas, tablero, i);
+  }
+};
+crearTableroAciertos(numIntentos, numFilas, tableroAciertos);
+
+const agruparAciertos = (aciertosJuego) => {
+  let acierto = document.querySelectorAll(".acierto" + aciertosJuego);
+  return acierto;
+};
+
+const nuevoIntento = (numeroDeColores, intentoJuego) => {
+  let intento = document.querySelectorAll(".intento" + intentoJuego);
+  let intentoJugado = [];
+  for (let i = 0; i < numeroDeColores; i++) {
+    intento[i].addEventListener("click", function () {
+      let colorEscogido = sessionStorage.getItem("colorEscogido");
+      intentoJugado[i] = colorEscogido;
+      intento[i].style.backgroundColor = colorEscogido;
+      sessionStorage.removeItem("colorEscogido");
+    });
+  }
+  return intentoJugado;
+};
+
+const existeGanador = (combinacionJugador, combinacionGanadora) => {
+  for (let i = 0; i < combinacionGanadora.length; i++) {
+    if (combinacionGanadora[i] !== combinacionJugador[i]) {
+      return false;
+    }
+  }
+  return true;
+};
+const aciertos = (combinacionJugador, combinacionGanadora) => {
+  let pintarAciertos = [];
+  for (let i = 0; i < combinacionGanadora.length; i++) {
+    if (combinacionGanadora[i] == combinacionJugador[i]) {
+      pintarAciertos.push(1);
+    } else {
+      pintarAciertos.push(0);
+    }
+  }
+  return pintarAciertos;
+};
+
+// Crea el array random
+//--------------------------------------------------------->
 const combinacionGanadora = obtenerCombinacionGanadora(combinacionColores);
 console.log(combinacionGanadora);
 
-//----------------------------------------------------------------
-colorEscogidoUno.onclick = function () {
-  EscogidoUno = colorEscogidoUno.style.backgroundColor ;
-  sessionStorage.setItem("colorEscogido", EscogidoUno);
-};
-colorEscogidoDos.onclick = function () {
-  EscogidoDos = colorEscogidoDos.style.backgroundColor = "green";
-  sessionStorage.setItem("colorEscogido", EscogidoDos);
-};
-colorEscogidoTres.onclick = function (a , b) {
-  EscogidoTres = colorEscogidoTres.style.
-  backgroundColor = "blue";
-  sessionStorage.setItem("colorEscogido", EscogidoTres);
-};
-colorEscogidoCuatro.onclick = function () {
-  EscogidoCuatro = colorEscogidoCuatro.style.backgroundColor = "yellow";
-  sessionStorage.setItem("colorEscogido", EscogidoCuatro);
-};
-colorEscogidoCinco.onclick = function () {
-  EscogidoCinco = colorEscogidoCinco.style.backgroundColor = "orange";
-  sessionStorage.setItem("colorEscogido", EscogidoCinco);
-};
-//------------------------------------------------------------------
+// Crea tablero de jego
+//--------------------------------------------------------->
+crearTableroIntentos(numIntentos, numFilas, tablero);
+//--------------------------------------------------------->
+//--------------------------------------------------------->
+//--------------------------------------------------------->
+//--------------------------------------------------------->
 
-posicionUno.onclick = function () {
-  let posicionUnoFinal = sessionStorage.getItem("colorEscogido");
-  combinacionJugador.splice(0, 1, posicionUnoFinal);
-  posicionUno.style.backgroundColor = posicionUnoFinal;
-  sessionStorage.clear();
+const crearFilasColores = (numeroFilas, tableroJuego) => {
+  let contenedorFilas = document.createElement("div");
+  contenedorFilas.classList.add("contenedor-colores");
+  for (let i = 0; i < numeroFilas; i++) {
+    let numeroFila = document.createElement("div");
+    numeroFila.setAttribute("id", "posicion-" + i );
+    numeroFila.classList.add("intento");
+    numeroFila.classList.add("color"+0);
+    contenedorFilas.appendChild(numeroFila);
+  }
+  tableroJuego.appendChild(contenedorFilas);
 };
+crearFilasColores(numFilas, tableroColores)
 
-posicionDos.onclick = function () {
-  let posicionDosFinal = sessionStorage.getItem("colorEscogido");
-  combinacionJugador.splice(1, 1, posicionDosFinal);
-  posicionDos.style.backgroundColor = posicionDosFinal;
-  sessionStorage.clear();
-};
+let contenedorColores = document.querySelectorAll(".color0");
+let recogerColores = JSON.parse(sessionStorage.getItem("coloresJugar"));
+console.log(recogerColores);
 
-posicionTres.onclick = function () {
-  let posicionTresFinal = sessionStorage.getItem("colorEscogido");
-  combinacionJugador.splice(2, 1, posicionTresFinal);
-  posicionTres.style.backgroundColor = posicionTresFinal;
-  sessionStorage.clear();
-};
-posicionCuatro.onclick = function () {
-  let posicionCuatroFinal = sessionStorage.getItem("colorEscogido");
-  combinacionJugador.splice(3, 1, posicionCuatroFinal);
-  posicionCuatro.style.backgroundColor = posicionCuatroFinal;
-  sessionStorage.clear();
-};
-posicionCinco.onclick = function () {
-  let posicionCincoFinal = sessionStorage.getItem("colorEscogido");
-  combinacionJugador.splice(4, 1, posicionCincoFinal);
-  posicionCinco.style.backgroundColor = posicionCincoFinal;
-  sessionStorage.clear();
-};
 
-const combinacionJugador = [];
+for (let i = 0; i < contenedorColores.length; i++) {
+  contenedorColores[i].style.backgroundColor = recogerColores[i];
+ 
+  contenedorColores[i].addEventListener("click", function () {
+     let color0 = contenedorColores[i].style.backgroundColor;
+     sessionStorage.setItem("colorEscogido", color0);
+  });
+ }
+// for (let i = 0; i < contenedorColores.length; i++) {
+//   contenedorColores[i].style.backgroundColor = recogerColores[i];
+// }
 
-// const colores = [
-//   "rojo",
-//   "amarillo",
-//   "azul",
-//   "naranja",
-//   "verde",
-//   "violeta",
-//   "verde",
-//   "rosado",
-//   "negro",
-//   "gris",
-// ];
 
-//-------------------- VERIFICACION DE ACIERTOS  -----------------
-btnenviar.onclick = function () {
-  const condicionGanadora = [1, 1, 1, 1, 1];
-  console.log(condicionGanadora);
-  const obtenerAciertos = (combinacionGanadora, combinacionJugador) => {
-    let aciertos = [];
+// contenedorColores[i].addEventListener("click", function () {
+// let color0 = contenedorColores[i].style.backgroundColor;
+// sessionStorage.setItem("colorEscogido", color0)
+// })  
 
-    for (let i = 0; i < combinacionGanadora.length; i++) {
-      if (combinacionGanadora[i] === combinacionJugador[i]) {
-        aciertos.push(1);
-      } else {
-        aciertos.push(0);
-      }
+// contenedorColores[1].addEventListener("click", function () {
+// let color0 = contenedorColores[1].style.backgroundColor;
+// sessionStorage.setItem("colorEscogido", color0)
+// })  
+// contenedorColores[2].addEventListener("click", function () {
+// let color0 = contenedorColores[2].style.backgroundColor;
+// sessionStorage.setItem("colorEscogido", color0)
+// })  
+// contenedorColores[3].addEventListener("click", function () {
+// let color0 = contenedorColores[3].style.backgroundColor;
+// sessionStorage.setItem("colorEscogido", color0)
+// })  
+// contenedorColores[4].addEventListener("click", function () {
+// let color0 = contenedorColores[4].style.backgroundColor;
+// sessionStorage.setItem("colorEscogido", color0)
+// })  
+// contenedorColores[5].addEventListener("click", function () {
+// let color0 = contenedorColores[].style.backgroundColor;
+// sessionStorage.setItem("colorEscogido", color0)
+// })  
+
+
+
+const verificarAciertos = (aciertosAgrupados, confirmarAciertos) => {
+  for (let i = 0; i < aciertosAgrupados.length; i++) {
+    if (confirmarAciertos[i] == 1) {
+      aciertosAgrupados[i].style.backgroundColor = "white";
+    } else {
+      aciertosAgrupados[i].style.backgroundColor = "black";
     }
-    return aciertos;
-  };
-  let aciertosTotal = obtenerAciertos(combinacionGanadora, combinacionJugador);
-  console.log(aciertosTotal);
-
-  const existeGanador = (aciertosTotal, condicionGanadora) => {
-    console.log(condicionGanadora);
-    console.log(aciertosTotal);
-    for (let i = 0; i < aciertosTotal.length; i++) {
-      if (condicionGanadora[i] !== aciertosTotal[i]) {
-        return false;
-      }
-      console.log("ganaste");
-      return true;
-    }
-  };
-  existeGanador(aciertosTotal, condicionGanadora);
+  }
 };
+
+let validar = document.getElementById("validar");
+let numIntento = 0;
+let esJugadaGanadora = false;
+
+let combinacionJugador = nuevoIntento(numFilas, numIntento);
+let aciertosAgrupados = agruparAciertos(numIntento);
+
+validar.addEventListener("click", function () {
+  console.log(numIntento);
+  if (combinacionJugador.length == 0) {
+    return;
+  }
+  console.log(combinacionJugador);
+
+  esJugadaGanadora = existeGanador(combinacionJugador, combinacionGanadora);
+  let pintarAciertos = aciertos(combinacionJugador, combinacionGanadora);
+
+  verificarAciertos(aciertosAgrupados, pintarAciertos);
+  if (esJugadaGanadora) {
+    alert("Ganaste");
+  } else {
+    numIntento++;
+    combinacionJugador = nuevoIntento(numFilas, numIntento);
+    aciertosAgrupados = agruparAciertos(numIntento);
+  }
+});

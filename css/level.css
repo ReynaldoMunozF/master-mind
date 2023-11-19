@@ -74,13 +74,22 @@ body{
     width: 3em;
     height: 3em;
 }
+
+.img2:hover{
+    width: 3.2em;
+    height: 3.2em;
+}
+.img2:active{
+    width: 2.8em;
+    height: 2.8em;
+}
 .texto1{
     justify-content: center;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     color: rgb(0, 0, 0);
-    font-size: 2.5em;
+    font-size: 2em;
     animation-name: sombra;
     animation-duration: 8s;
     animation-iteration-count: infinite;
@@ -105,8 +114,8 @@ body{
     }
 }
 input {
-    font-size: 3em;
-    width: 7em;
+    font-size: 2.5em;
+    width: 6em;
     text-align: center;
     background-color: transparent;
     border-color: #5a5a5a;
@@ -141,7 +150,7 @@ input {
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     color: rgb(0, 0, 0);
-    font-size: 2em;
+    font-size: 1.5em;
     animation-name: sombra;
     animation-duration: 8s;
     animation-iteration-count: infinite;
@@ -221,17 +230,17 @@ input {
   }
  
 button{
-    width:200px;
-    height:70px;
+    width:150px;
+    height:60px;
     /* background: linear-gradient(to left top, #c32c71 50%, #b33771 50%); */
 
     border-style: none;
     border-radius: 10px;
     color:#8e8d8d;
-    font-size: 20px;
+    font-size: 14px;
     letter-spacing: 3px;
     font-family: Arial, Helvetica, sans-serif;
-    font-weight: 600;
+    font-weight: 700;
     outline: none;
     cursor: pointer;
     position: relative;

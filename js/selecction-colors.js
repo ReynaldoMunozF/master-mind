@@ -67,5 +67,5 @@ let btnEnviar = document.getElementById("enviar");
 
 btnEnviar.addEventListener("click", function () {
   sessionStorage.setItem("coloresJugar", JSON.stringify(coloresJugar));
-  location.href = "./pruebas.html";
+  location.href = "./game.html";
 });
