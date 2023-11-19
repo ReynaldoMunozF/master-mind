@@ -69,3 +69,8 @@ btnEnviar.addEventListener("click", function () {
   sessionStorage.setItem("coloresJugar", JSON.stringify(coloresJugar));
   location.href = "./game.html";
 });
+
+let btnHome = document.getElementById("btnHome");
+btnHome.addEventListener("click", function () {
+  window.location.href = "../index.html";
+});

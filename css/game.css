@@ -397,3 +397,22 @@ button:hover{
 button:hover span{
     animation-play-state: paused;
 }
+.imagen2 .img2 {
+    width: 3em;
+    height: 3em;
+    margin-top: 2em;
+    animation-name: sombra;
+animation-duration: 8s;
+animation-iteration-count: infinite;
+}
+.img2:hover{
+    width: 3.2em;
+    height: 3.2em;
+}
+.img2:active{
+    width: 2.8em;
+    height: 2.8em;
+}
+.botones {
+    display: flex;
+}
